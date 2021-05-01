@@ -16,5 +16,5 @@ interface ImagesApiService {
     fun getImagesList(
         @Query("page") page: Int,
         @Query("limit") limit: Int
-    ): Single<ImagesResponse>
+    ): Single<List<ImagesResponse>>
 }

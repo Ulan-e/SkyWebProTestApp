@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkyWebProTestApp"
         android:name=".presentation.base.BaseApplication">
-        <activity android:name=".presentation.main.MainActivity">
+        <activity android:name=".presentation.main.MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

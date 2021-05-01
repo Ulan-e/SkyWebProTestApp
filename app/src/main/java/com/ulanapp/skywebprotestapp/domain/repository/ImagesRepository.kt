@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface ImagesRepository {
 
-    fun getImagesList(page: Int, limit: Int): Single<ImagesResponse>
+    fun getImagesList(page: Int, limit: Int): Single<List<ImagesResponse>>
 }
