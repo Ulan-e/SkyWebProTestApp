@@ -1,4 +1,4 @@
-package com.ulanapp.skywebprotestapp.data.repository.images
+package com.ulanapp.skywebprotestapp.domain.repository
 
 import com.ulanapp.skywebprotestapp.domain.model.ImagesResponse
 import io.reactivex.Single
