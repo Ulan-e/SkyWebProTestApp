@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SkyWebProTestApp</string>
+    <string name="images">Картинки</string>
+    <string name="login">Логин</string>
 </resources>

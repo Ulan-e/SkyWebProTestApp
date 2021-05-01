@@ -1,6 +1,6 @@
 package com.ulanapp.skywebprotestapp.di.component
 
-import com.ulanapp.skywebprotestapp.CoreApplication
+import com.ulanapp.skywebprotestapp.presentation.base.BaseApplication
 import com.ulanapp.skywebprotestapp.di.modules.ActivityBuilderModule
 import com.ulanapp.skywebprotestapp.di.modules.AppModule
 import com.ulanapp.skywebprotestapp.di.modules.FragmentBuilderModule
@@ -17,13 +17,13 @@ import dagger.android.support.AndroidSupportInjectionModule
         FragmentBuilderModule::class
     ]
 )
-interface AppComponent : AndroidInjector<CoreApplication> {
+interface AppComponent : AndroidInjector<BaseApplication> {
 
     @Component.Builder
     interface Builder {
 
         @BindsInstance
-        fun application(application: CoreApplication): Builder
+        fun application(application: BaseApplication): Builder
         fun build(): AppComponent
     }
 }

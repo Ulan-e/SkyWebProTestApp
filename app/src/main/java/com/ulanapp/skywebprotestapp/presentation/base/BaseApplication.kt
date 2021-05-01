@@ -1,12 +1,13 @@
-package com.ulanapp.skywebprotestapp
+package com.ulanapp.skywebprotestapp.presentation.base
 
 import com.chibatching.kotpref.Kotpref
+import com.ulanapp.skywebprotestapp.BuildConfig
 import com.ulanapp.skywebprotestapp.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import timber.log.Timber
 
-class CoreApplication : DaggerApplication() {
+class BaseApplication : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()

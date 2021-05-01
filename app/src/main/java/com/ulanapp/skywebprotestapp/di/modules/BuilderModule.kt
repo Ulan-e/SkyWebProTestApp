@@ -1,8 +1,8 @@
 package com.ulanapp.skywebprotestapp.di.modules
 
-import com.ulanapp.skywebprotestapp.presentation.AuthorizationFragment
-import com.ulanapp.skywebprotestapp.presentation.ImagesFragment
-import com.ulanapp.skywebprotestapp.presentation.MainActivity
+import com.ulanapp.skywebprotestapp.presentation.login.LoginFragment
+import com.ulanapp.skywebprotestapp.presentation.images.ImagesFragment
+import com.ulanapp.skywebprotestapp.presentation.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -16,9 +16,11 @@ abstract class ActivityBuilderModule {
 @Module
 abstract class FragmentBuilderModule {
 
-    @ContributesAndroidInjector(modules = [ImagesModule::class])
-    abstract fun authorizationFragment(): AuthorizationFragment
-
+    @WeatherScope
     @ContributesAndroidInjector(modules = [WeatherModule::class])
+    abstract fun loginFragment(): LoginFragment
+
+    @ImagesScope
+    @ContributesAndroidInjector(modules = [ImagesModule::class])
     abstract fun imagesFragment(): ImagesFragment
 }
