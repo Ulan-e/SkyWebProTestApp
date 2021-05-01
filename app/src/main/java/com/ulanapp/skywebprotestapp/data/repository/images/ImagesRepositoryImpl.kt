@@ -4,9 +4,9 @@ import com.ulanapp.skywebprotestapp.data.source.ImagesApiService
 import com.ulanapp.skywebprotestapp.domain.model.ImagesResponse
 import io.reactivex.Single
 
-class ApiImagesRepositoryImpl(
+class ImagesRepositoryImpl(
     private val imagesApi: ImagesApiService
-) : ApiImagesRepository {
+) : ImagesRepository {
 
     override fun getImagesList(page: Int, limit: Int): Single<ImagesResponse> {
         return imagesApi.getImagesList(page, limit)
