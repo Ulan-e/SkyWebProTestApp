@@ -1,8 +1,8 @@
 package com.ulanapp.skywebprotestapp.di.modules
 
-import com.ulanapp.skywebprotestapp.data.repository.weather.WeatherRepository
 import com.ulanapp.skywebprotestapp.data.repository.weather.WeatherRepositoryImpl
 import com.ulanapp.skywebprotestapp.data.source.WeatherApiService
+import com.ulanapp.skywebprotestapp.domain.repository.WeatherRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -53,8 +53,8 @@ class WeatherModule {
     @Provides
     @WeatherScope
     fun provideService(retrofit: Retrofit): WeatherRepository {
-        val imagesRetrofit = retrofit.create(WeatherApiService::class.java)
-        return WeatherRepositoryImpl(imagesRetrofit)
+        val weatherRetrofit = retrofit.create(WeatherApiService::class.java)
+        return WeatherRepositoryImpl(weatherRetrofit)
     }
 }
 
