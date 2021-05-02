@@ -12,17 +12,18 @@ class LoginViewModel(
     private val getWeatherUseCase: GetWeatherUseCase
 ) : ViewModel() {
 
+    private var disposable: CompositeDisposable = CompositeDisposable()
+
     val loadingProgress = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
     val data = MutableLiveData<WeatherResponse>()
 
-    private var disposable: CompositeDisposable = CompositeDisposable()
-
-    fun getWeatherInfo(cityId: Int) {
+    // загружаем сведений о погоде
+    fun getWeatherInfo(cityId: Int, apiKey: String, lang: String, units: String) {
         loadingProgress.value = true
 
         disposable.add(
-            getWeatherUseCase.execute(cityId)
+            getWeatherUseCase.execute(cityId, apiKey, lang, units)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
