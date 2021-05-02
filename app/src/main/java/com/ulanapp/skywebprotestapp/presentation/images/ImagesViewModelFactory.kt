@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ulanapp.skywebprotestapp.domain.usecase.GetImagesUseCase
 
-class ImagesViewModelFactory(private var getImagesUseCase: GetImagesUseCase)
-    : ViewModelProvider.Factory {
+class ImagesViewModelFactory (
+    private var getImagesUseCase: GetImagesUseCase
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

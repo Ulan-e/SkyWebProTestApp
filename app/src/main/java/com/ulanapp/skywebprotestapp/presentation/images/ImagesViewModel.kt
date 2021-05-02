@@ -1,45 +1,45 @@
 package com.ulanapp.skywebprotestapp.presentation.images
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.ulanapp.skywebprotestapp.domain.model.ImagesResponse
 import com.ulanapp.skywebprotestapp.domain.usecase.GetImagesUseCase
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.ulanapp.skywebprotestapp.presentation.images.paging.ImagesDataSource
+import com.ulanapp.skywebprotestapp.presentation.images.paging.ImagesDataSourceFactory
+import com.ulanapp.skywebprotestapp.presentation.images.paging.State
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class ImagesViewModel(
-    private var getImagesUseCase: GetImagesUseCase
+    getImagesUseCase: GetImagesUseCase
 ): ViewModel() {
 
-    val loadingProgress = MutableLiveData<Boolean>()
-    val errorMessage = MutableLiveData<String>()
-    val data = MutableLiveData<List<ImagesResponse>>()
-
-    private var disposable: CompositeDisposable = CompositeDisposable()
+    var imagesList: LiveData<PagedList<ImagesResponse>>
+    private val compositeDisposable = CompositeDisposable()
+    private val pageSize = 2
+    private var imagesDataSourceFactory: ImagesDataSourceFactory =
+        ImagesDataSourceFactory(compositeDisposable, getImagesUseCase)
 
     init {
-        loadingProgress.value = true
+        val config = PagedList.Config.Builder()
+            .setPageSize(pageSize)
+            .setInitialLoadSizeHint(pageSize * 1)
+            .setEnablePlaceholders(false)
+            .build()
+        imagesList = LivePagedListBuilder(imagesDataSourceFactory, config).build()
     }
 
-    fun getAllImages(page: Int, limit: Int) {
-        disposable.add(
-            getImagesUseCase.execute(page, limit)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(
-                    { result ->
-                        loadingProgress.value = false
-                        data.value = result
-                    },
-                    { error ->
-                        errorMessage.value = error.message
-                    })
-        )
+    fun getState(): LiveData<State> = Transformations.switchMap(
+        imagesDataSourceFactory.imagesDataSource, ImagesDataSource::state)
+
+    fun listIsEmpty(): Boolean {
+        return imagesList.value?.isEmpty() ?: true
     }
 
     override fun onCleared() {
         super.onCleared()
-        disposable.clear()
+        compositeDisposable.dispose()
     }
 }

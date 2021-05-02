@@ -1,50 +1,37 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/elevation_4dp"
+    app:cardUseCompatPadding="true">
 
-    <data>
-
-        <variable
-            name="image"
-            type="com.ulanapp.skywebprotestapp.domain.model.ImagesResponse" />
-
-    </data>
-
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/elevation_4dp"
-        app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardUseCompatPadding="true">
+        android:padding="@dimen/margin_10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!-- картинка -->
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/images_height_200dp"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- автор картинки -->
+        <TextView
+            android:id="@+id/author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_10dp">
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:paddingBottom="@dimen/margin_10dp"
+            android:textSize="@dimen/text_size_17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/picture" />
 
-            <!-- картинка -->
-            <ImageView
-                android:id="@+id/picture"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/images_height_200dp"
-                android:layout_marginBottom="@dimen/margin_20dp"
-                app:imageUrl="@{image.url}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- автор картинки -->
-            <TextView
-                android:id="@+id/author"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10dp"
-                android:paddingBottom="@dimen/margin_10dp"
-                android:textSize="@dimen/text_size_17sp"
-                android:text="@{image.author}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/picture" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</layout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
