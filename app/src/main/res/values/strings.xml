@@ -2,4 +2,15 @@
     <string name="app_name">SkyWebProTestApp</string>
     <string name="images">Картинки</string>
     <string name="login">Логин</string>
+    <string name="lang">ru</string>
+    <string name="api_key">c35880b49ff95391b3a6d0edd0c722eb</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="incorrect_login">Введите правильный e-mail</string>
+    <string name="incorrect_password">Слабый пароль</string>
+    <string name="error_network">Ошибка с сетью</string>
+    <string name="password">Пароль</string>
+    <string name="enter">Войти</string>
+    <string name="message">Город %1$s Температура, %2$s Облачность %3$s Влажность %3$s </string>
+    <string name="units_metric">metric</string>
 </resources>
