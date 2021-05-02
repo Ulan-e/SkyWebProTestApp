@@ -10,10 +10,14 @@ import com.ulanapp.skywebprotestapp.R
 import com.ulanapp.skywebprotestapp.databinding.FragmentLoginBinding
 import com.ulanapp.skywebprotestapp.domain.usecase.GetWeatherUseCase
 import com.ulanapp.skywebprotestapp.presentation.base.BaseFragment
+import com.ulanapp.skywebprotestapp.presentation.images.paging.State
 import com.ulanapp.skywebprotestapp.presentation.main.MainActivity
 import com.ulanapp.skywebprotestapp.utils.PASSWORD_PATTERN
+import com.ulanapp.skywebprotestapp.utils.hideKeyboard
 import com.ulanapp.skywebprotestapp.utils.showMessage
+import kotlinx.android.synthetic.main.fragment_images.*
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.progress_bar
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -45,24 +49,44 @@ class LoginFragment : BaseFragment() {
 
         btn_login.setOnClickListener {
             loadWeatherInfo()
+            view.hideKeyboard()
         }
 
         getWeatherData()
 
-        getLoadingProgress()
-
-        getErrorMessage()
+        initState()
     }
 
     // получаем данные о погоде
     private fun getWeatherData() {
-        model.errorMessage.observe(this, { errorMessage ->
-            if (!errorMessage.isNullOrEmpty()) {
-                binding.root.showMessage(resources.getString(R.string.error_network))
-                Timber.e(errorMessage)
-            }
+        model.data.observe(this, {
+            val message = String.format(
+                resources.getString(R.string.message),
+                it.name,
+                it.main.tempMin,
+                it.clouds.all,
+                it.main.humidity
+            )
+            binding.root.showMessage(message)
+            Timber.e(it.toString())
         })
     }
+
+    private fun initState() {
+        model.getState().observe(this, { state ->
+            progress_bar.visibility =
+                if (state == State.LOADING) View.VISIBLE
+                else View.GONE
+        })
+    }
+
+
+
+
+
+
+
+/*
 
     // получаем прогресс загрузки данныхо погоде
     private fun getLoadingProgress() {
@@ -87,7 +111,7 @@ class LoginFragment : BaseFragment() {
             binding.root.showMessage(message)
             Timber.e(it.toString())
         })
-    }
+    }*/
 
     // загрузка сведений о погоде
     private fun loadWeatherInfo() {

@@ -1,12 +1,17 @@
 package com.ulanapp.skywebprotestapp.presentation.login
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.ulanapp.skywebprotestapp.domain.model.WeatherResponse
 import com.ulanapp.skywebprotestapp.domain.usecase.GetWeatherUseCase
+import com.ulanapp.skywebprotestapp.presentation.images.paging.ImagesDataSource
+import com.ulanapp.skywebprotestapp.presentation.images.paging.State
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class LoginViewModel(
     private val getWeatherUseCase: GetWeatherUseCase
@@ -14,28 +19,37 @@ class LoginViewModel(
 
     private var disposable: CompositeDisposable = CompositeDisposable()
 
-    val loadingProgress = MutableLiveData<Boolean>()
-    val errorMessage = MutableLiveData<String>()
     val data = MutableLiveData<WeatherResponse>()
+    private val state = MutableLiveData<State>()
 
     // загружаем сведений о погоде
     fun getWeatherInfo(cityId: Int, apiKey: String, lang: String, units: String) {
-        loadingProgress.value = true
+        updateState(State.LOADING)
 
         disposable.add(
             getWeatherUseCase.execute(cityId, apiKey, lang, units)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(
-                    { result ->
-                        loadingProgress.value = false
-                        data.value = result
+                    { response ->
+                        updateState(State.SUCCESS)
+                        data.value = response
+                        Timber.d(response.toString())
                     },
                     { error ->
-                        loadingProgress.value = false
-                        errorMessage.value = error.message
+                        updateState(State.ERROR)
+                        Timber.e(error.localizedMessage)
                     })
         )
+    }
+
+    // обновляем состояние
+    private fun updateState(state: State) {
+        this.state.postValue(state)
+    }
+
+    fun getState(): LiveData<State> = Transformations.switchMap(data) {
+        state
     }
 
     override fun onCleared() {
