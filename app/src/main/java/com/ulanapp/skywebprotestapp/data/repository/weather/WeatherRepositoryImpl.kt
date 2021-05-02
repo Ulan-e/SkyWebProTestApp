@@ -9,7 +9,12 @@ class WeatherRepositoryImpl(
     private val weatherApi: WeatherApiService
 ) : WeatherRepository {
 
-    override fun getWeatherData(cityId: Int): Single<WeatherResponse> {
-        return weatherApi.getWeatherData("c35880b49ff95391b3a6d0edd0c722eb")
+    override fun getWeatherData(
+        cityId: Int,
+        apiKey: String,
+        lang: String,
+        units: String
+    ): Single<WeatherResponse> {
+        return weatherApi.getWeatherData(cityId, apiKey, lang, units)
     }
 }

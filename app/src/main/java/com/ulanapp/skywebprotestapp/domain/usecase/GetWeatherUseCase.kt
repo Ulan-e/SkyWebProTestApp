@@ -9,7 +9,7 @@ class GetWeatherUseCase @Inject constructor(
     private val weatherRepo: WeatherRepository
 ) {
 
-    fun execute(cityId: Int): Single<WeatherResponse> {
-        return weatherRepo.getWeatherData(cityId)
+    fun execute(cityId: Int, apiKey: String, lang: String, units: String): Single<WeatherResponse> {
+        return weatherRepo.getWeatherData(cityId, apiKey, lang, units)
     }
 }

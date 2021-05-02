@@ -8,12 +8,15 @@ import retrofit2.http.Query
 interface WeatherApiService {
 
     companion object {
-        private const val WEATHER = "data/2.5/weather?id=498817"
+        private const val WEATHER = "data/2.5/weather"
     }
 
     // метод для получения данных о погоде
     @GET(WEATHER)
     fun getWeatherData(
-        @Query("appid") id: String
+        @Query("id") id: Int,
+        @Query("appid") appid: String,
+        @Query("lang") lang: String,
+        @Query("units") units: String
     ): Single<WeatherResponse>
 }

@@ -5,5 +5,10 @@ import io.reactivex.Single
 
 interface WeatherRepository {
 
-    fun getWeatherData(cityId: Int): Single<WeatherResponse>
+    fun getWeatherData(
+        cityId: Int,
+        apiKey: String,
+        lang: String,
+        units: String
+    ): Single<WeatherResponse>
 }
