@@ -51,4 +51,9 @@ class MainActivity : BaseActivity(), CallFragmentListener {
             }
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }
