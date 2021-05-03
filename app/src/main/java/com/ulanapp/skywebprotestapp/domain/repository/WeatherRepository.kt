@@ -5,6 +5,7 @@ import io.reactivex.Single
 
 interface WeatherRepository {
 
+    // получение данных о погоде
     fun getWeatherData(
         cityId: Int,
         apiKey: String,

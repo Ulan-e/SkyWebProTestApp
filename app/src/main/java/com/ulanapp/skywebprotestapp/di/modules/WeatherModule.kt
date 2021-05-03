@@ -1,6 +1,6 @@
 package com.ulanapp.skywebprotestapp.di.modules
 
-import com.ulanapp.skywebprotestapp.data.repository.weather.WeatherRepositoryImpl
+import com.ulanapp.skywebprotestapp.data.repository.WeatherRepositoryImpl
 import com.ulanapp.skywebprotestapp.data.source.WeatherApiService
 import com.ulanapp.skywebprotestapp.domain.repository.WeatherRepository
 import dagger.Module

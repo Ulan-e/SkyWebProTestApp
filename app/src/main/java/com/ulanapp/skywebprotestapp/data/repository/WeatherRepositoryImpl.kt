@@ -1,4 +1,4 @@
-package com.ulanapp.skywebprotestapp.data.repository.weather
+package com.ulanapp.skywebprotestapp.data.repository
 
 import com.ulanapp.skywebprotestapp.data.source.WeatherApiService
 import com.ulanapp.skywebprotestapp.domain.model.WeatherResponse

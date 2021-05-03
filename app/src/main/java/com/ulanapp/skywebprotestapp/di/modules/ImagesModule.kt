@@ -1,6 +1,6 @@
 package com.ulanapp.skywebprotestapp.di.modules
 
-import com.ulanapp.skywebprotestapp.data.repository.images.ImagesRepositoryImpl
+import com.ulanapp.skywebprotestapp.data.repository.ImagesRepositoryImpl
 import com.ulanapp.skywebprotestapp.data.source.ImagesApiService
 import com.ulanapp.skywebprotestapp.domain.repository.ImagesRepository
 import dagger.Module

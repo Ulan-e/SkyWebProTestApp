@@ -1,4 +1,4 @@
-package com.ulanapp.skywebprotestapp.data.repository.images
+package com.ulanapp.skywebprotestapp.data.repository
 
 import com.ulanapp.skywebprotestapp.data.source.ImagesApiService
 import com.ulanapp.skywebprotestapp.domain.model.ImagesResponse

@@ -5,5 +5,6 @@ import io.reactivex.Single
 
 interface ImagesRepository {
 
+    // получаем все картинки
     fun getImagesList(page: Int, limit: Int): Single<List<ImagesResponse>>
 }
