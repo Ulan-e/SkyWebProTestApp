@@ -46,7 +46,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
 
-    //Multidex
+    //MultiDex
     implementation 'com.android.support:multidex:1.0.3'
 
     //Rx
