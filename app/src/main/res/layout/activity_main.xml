@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_menu" />
 
-        <!-- нижнее меню -->
+        <!-- нижнее навигационное меню -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_menu"
             android:layout_width="match_parent"

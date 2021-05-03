@@ -11,6 +11,6 @@
     <string name="error_network">Ошибка с сетью</string>
     <string name="password">Пароль</string>
     <string name="enter">Войти</string>
-    <string name="message">Город %1$s Температура, %2$s Облачность %3$s Влажность %3$s </string>
+    <string name="message">Город %1$s Температура, %2$s Облачность %3$s Влажность %4$s </string>
     <string name="units_metric">metric</string>
 </resources>
