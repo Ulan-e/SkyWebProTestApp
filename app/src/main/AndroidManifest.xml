@@ -3,6 +3,7 @@
     package="com.ulanapp.skywebprotestapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -10,8 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SkyWebProTestApp">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.SkyWebProTestApp"
+        android:name=".presentation.base.BaseApplication">
+        <activity android:name=".presentation.main.MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
