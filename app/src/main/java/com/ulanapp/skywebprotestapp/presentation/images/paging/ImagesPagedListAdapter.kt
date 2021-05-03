@@ -12,8 +12,9 @@ import com.ulanapp.skywebprotestapp.R
 import com.ulanapp.skywebprotestapp.domain.model.ImagesResponse
 import kotlinx.android.synthetic.main.recycler_item_image.view.*
 import kotlinx.android.synthetic.main.recycler_item_image_footer.view.*
+import javax.inject.Inject
 
-class ImagesPagedListAdapter :
+class ImagesPagedListAdapter @Inject constructor():
     PagedListAdapter<ImagesResponse, RecyclerView.ViewHolder>(imagesDiffCallback) {
 
     private var state = State.LOADING
@@ -60,6 +61,7 @@ class ImagesPagedListAdapter :
         return super.getItemCount() + if (hasFooter()) 1 else 0
     }
 
+    // проверка есть ли футер
     private fun hasFooter(): Boolean {
         return super.getItemCount() != 0 && (state == State.LOADING || state == State.ERROR)
     }

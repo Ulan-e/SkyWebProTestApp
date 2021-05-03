@@ -17,16 +17,16 @@ class LoginViewModel(
     private val getWeatherUseCase: GetWeatherUseCase
 ) : ViewModel() {
 
-    private var disposable: CompositeDisposable = CompositeDisposable()
+    private var compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private val state = MutableLiveData<State>()
 
     val data = MutableLiveData<WeatherResponse>()
-    private val state = MutableLiveData<State>()
 
     // загружаем сведений о погоде
     fun getWeatherInfo(cityId: Int, apiKey: String, lang: String, units: String) {
         updateState(State.LOADING)
 
-        disposable.add(
+        compositeDisposable.add(
             getWeatherUseCase.execute(cityId, apiKey, lang, units)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -54,6 +54,6 @@ class LoginViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        disposable.clear()
+        compositeDisposable.clear()
     }
 }

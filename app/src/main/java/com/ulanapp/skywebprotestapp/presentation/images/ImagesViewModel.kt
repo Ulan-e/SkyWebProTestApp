@@ -16,10 +16,11 @@ class ImagesViewModel(
     getImagesUseCase: GetImagesUseCase
 ): ViewModel() {
 
-    var imagesList: LiveData<PagedList<ImagesResponse>>
+    val imagesList: LiveData<PagedList<ImagesResponse>>
+
     private val compositeDisposable = CompositeDisposable()
     private val pageSize = 2
-    private var imagesDataSourceFactory: ImagesDataSourceFactory =
+    private var imagesDataSourceFactory =
         ImagesDataSourceFactory(compositeDisposable, getImagesUseCase)
 
     init {
@@ -31,9 +32,11 @@ class ImagesViewModel(
         imagesList = LivePagedListBuilder(imagesDataSourceFactory, config).build()
     }
 
+    // получаем состояние загрузки данных
     fun getState(): LiveData<State> = Transformations.switchMap(
         imagesDataSourceFactory.imagesDataSource, ImagesDataSource::state)
 
+    // проверка пуст ли список данных
     fun listIsEmpty(): Boolean {
         return imagesList.value?.isEmpty() ?: true
     }

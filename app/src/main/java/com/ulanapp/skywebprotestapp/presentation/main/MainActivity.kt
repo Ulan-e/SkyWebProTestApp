@@ -29,6 +29,7 @@ class MainActivity : BaseActivity(), CallFragmentListener {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.model = model
+
         setSupportActionBar(main_toolbar)
     }
 

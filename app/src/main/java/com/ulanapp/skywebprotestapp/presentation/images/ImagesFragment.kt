@@ -20,7 +20,9 @@ class ImagesFragment : BaseFragment() {
     @Inject
     lateinit var imagesUseCase: GetImagesUseCase
 
-    private lateinit var adapter: ImagesPagedListAdapter
+    @Inject
+    lateinit var adapter: ImagesPagedListAdapter
+
     private lateinit var binding: FragmentImagesBinding
     private lateinit var model: ImagesViewModel
 
@@ -46,14 +48,15 @@ class ImagesFragment : BaseFragment() {
         initState()
     }
 
+    // инициализация адаптера
     private fun initAdapter() {
-        adapter = ImagesPagedListAdapter()
         recycler_view_images.adapter = adapter
         model.imagesList.observe(this, {
             adapter.submitList(it)
         })
     }
 
+    // инициализация состояния
     private fun initState() {
         model.getState().observe(this, { state ->
             progress_bar.visibility =

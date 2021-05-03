@@ -52,26 +52,26 @@ class LoginFragment : BaseFragment() {
             view.hideKeyboard()
         }
 
-        getWeatherData()
+        getWeatherInfo()
 
         initState()
     }
 
     // получаем данные о погоде
-    private fun getWeatherData() {
+    private fun getWeatherInfo() {
         model.data.observe(this, {
-            val message = String.format(
+            val weatherInfo = String.format(
                 resources.getString(R.string.message),
                 it.name,
                 it.main.tempMin,
                 it.clouds.all,
                 it.main.humidity
             )
-            binding.root.showMessage(message)
-            Timber.e(it.toString())
+            binding.root.showMessage(weatherInfo)
         })
     }
 
+    // инициализация состояния получения данных
     private fun initState() {
         model.getState().observe(this, { state ->
             progress_bar.visibility =

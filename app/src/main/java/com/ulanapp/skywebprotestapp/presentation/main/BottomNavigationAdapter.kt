@@ -14,7 +14,10 @@ class BottomNavigationAdapter {
             view: BottomNavigationView,
             listener: BottomNavigationView.OnNavigationItemSelectedListener
         ) {
+            // по умолчания активный экран логина
             view.selectedItemId = R.id.login
+
+            // ставим листенер
             view.setOnNavigationItemSelectedListener(listener)
         }
     }

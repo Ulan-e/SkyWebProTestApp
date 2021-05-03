@@ -15,6 +15,7 @@ class MainViewModel(
         listener.showFragment(LOGIN_FRAGMENT)
     }
 
+    // клик на айтем нижнего навигационного меню
     fun onNavigationClick(@NonNull menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.login -> {
