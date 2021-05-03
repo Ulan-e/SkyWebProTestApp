@@ -13,12 +13,10 @@ import com.ulanapp.skywebprotestapp.presentation.base.BaseFragment
 import com.ulanapp.skywebprotestapp.presentation.images.paging.State
 import com.ulanapp.skywebprotestapp.presentation.main.MainActivity
 import com.ulanapp.skywebprotestapp.utils.PASSWORD_PATTERN
+import com.ulanapp.skywebprotestapp.utils.UserPref
 import com.ulanapp.skywebprotestapp.utils.hideKeyboard
 import com.ulanapp.skywebprotestapp.utils.showMessage
-import kotlinx.android.synthetic.main.fragment_images.*
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_login.progress_bar
-import timber.log.Timber
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -68,10 +66,12 @@ class LoginFragment : BaseFragment() {
                 it.main.humidity
             )
             binding.root.showMessage(weatherInfo)
+
+            saveUserPreferences()
         })
     }
 
-    // инициализация состояния получения данных
+    // инициализация состояния загрузки данных
     private fun initState() {
         model.getState().observe(this, { state ->
             progress_bar.visibility =
@@ -79,39 +79,6 @@ class LoginFragment : BaseFragment() {
                 else View.GONE
         })
     }
-
-
-
-
-
-
-
-/*
-
-    // получаем прогресс загрузки данныхо погоде
-    private fun getLoadingProgress() {
-        model.loadingProgress.observe(this, { progress ->
-            progress_bar.visibility = if (progress == true)
-                View.VISIBLE
-            else
-                View.GONE
-        })
-    }
-
-    // получаем ошибку от сервера
-    private fun getErrorMessage() {
-        model.data.observe(this, {
-            val message = String.format(
-                resources.getString(R.string.message),
-                it.name,
-                it.main.tempMin,
-                it.clouds.all,
-                it.main.humidity
-            )
-            binding.root.showMessage(message)
-            Timber.e(it.toString())
-        })
-    }*/
 
     // загрузка сведений о погоде
     private fun loadWeatherInfo() {
@@ -124,6 +91,13 @@ class LoginFragment : BaseFragment() {
             return
         }
         model.getWeatherInfo(cityId, apiKey, lang, units)
+    }
+
+    // сохраняем данные о пользователе
+    private fun saveUserPreferences() {
+        UserPref.apply {
+            loggedIn = true
+        }
     }
 
     // проверка логина
